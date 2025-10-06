@@ -1,0 +1,19 @@
+name: Dev and Staging CI/CD Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  dev-staging-workflow:
+    uses: yoav7000/Central-ci-cd/.github/workflows/dev-staging-feature-branch-wf.yaml@main
+    with:
+      app_name: devops-project
+      gitops_values_path: environments/{ENV_NAME}/values/microservice-devops-values.yaml
+      gitops_repo: ${{ vars.GITOPS_REPO }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      GITOPS_REPO_TOKEN: ${{ secrets.GITOPS_REPO_TOKEN }}
+    

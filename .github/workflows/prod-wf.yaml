@@ -1,0 +1,19 @@
+name: Production CI/CD Workflow
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  prod-workflow:
+    uses: yoav7000/Central-ci-cd/.github/workflows/prod-wf.yaml@main
+    with:
+      app_name: devops-project
+      gitops_values_path: environments/{ENV_NAME}/values/microservice-devops-values.yaml
+      gitops_repo: ${{ vars.GITOPS_REPO }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      GITOPS_REPO_TOKEN: ${{ secrets.GITOPS_REPO_TOKEN }}
+    
