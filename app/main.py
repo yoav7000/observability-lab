@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.schemas import Item
 from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 from starlette.responses import Response
 import time
@@ -32,8 +33,8 @@ async def read_item(item_id: int, q: str = None):
     return {"item_id": item_id, "q": q}
 
 @app.post("/items/")
-async def create_item(name: str, description: str = None):
-    return {"name": name, "description": description}
+async def create_item(item: Item):
+    return {"name": item.name, "description": item.description}
 
 @app.get("/metrics")
 async def metrics():
