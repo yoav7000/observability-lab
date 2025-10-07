@@ -9,8 +9,8 @@ jobs:
   dev-staging-workflow:
     uses: yoav7000/Central-ci-cd/.github/workflows/dev-staging-feature-branch-wf.yaml@main
     with:
-      app_name: devops-project
-      gitops_values_path: environments/{ENV_NAME}/values/microservice-devops-values.yaml
+      app_name: observability-lab
+      gitops_values_path: services/observability-lab/envs/{ENV_NAME}/values.yaml
       gitops_repo: ${{ vars.GITOPS_REPO }}
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
